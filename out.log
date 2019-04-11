@@ -1,0 +1,11 @@
+192.168.10.143:80
+Traceback (most recent call last):
+  File "main.py", line 161, in <module>
+    t = http.HTTPServer((ip,port), handleRequest)
+  File "/usr/lib/python3.4/socketserver.py", line 429, in __init__
+    self.server_bind()
+  File "/usr/lib/python3.4/http/server.py", line 133, in server_bind
+    socketserver.TCPServer.server_bind(self)
+  File "/usr/lib/python3.4/socketserver.py", line 440, in server_bind
+    self.socket.bind(self.server_address)
+OSError: [Errno 98] Address already in use
