@@ -1,2 +1,5 @@
 serverCode/._*
 ._*
+serverCode/__pycache__/
+.mypy_cache/
+data/info.log

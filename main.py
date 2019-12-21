@@ -1,12 +1,20 @@
 #!/usr/bin/env python3.6
+from __future__ import annotations
 import http.server as http
 import serverCode
 import logging
 import socket, sys
 import random
 
-homeFiles = '/Users/Jonathan/Documents/GitHub/2019-Project/code/web'
+import typing
+
+if len(sys.argv) != 2:
+    raise Exception(f"Needs argument specifying folder to serve {sys.argv}")
+
+homeFiles = sys.argv[1]
+
 home = sys.path[0]
+print(f"Home folder = {home}")
 
 pyVersion = '3.6.0' # also works: 3.4.0
 version = '1.0.0'
@@ -14,6 +22,30 @@ version = '1.0.0'
 logging.basicConfig(filename=home + '/data/info.log', \
                     filemode='a', format='%(asctime)s %(message)s', \
                     level=logging.DEBUG)   
+
+def prep(func: typing.Callable[[handleRequest], None]):
+    def wrapper(self):
+        '''Does basic connection things like check the login cookie
+        and add the client_address and requestline to the log
+        '''
+        
+        self.requestHeaders = dict(self.headers.items())
+
+        # loginDetails is like a dict
+        # 'username' -> str, username of logged in user
+        # 'accountType' -> str, 'admin', 'user', or 'removed'
+        # 'loggedIn' -> bool, true if logged in, else false
+        # 'authentication' -> str, 'sesscookie' or 'usernameandpassword'
+        # 'sessCookie' -> str, randomized cookie for login session purposes
+
+        self.log.debug(self.client_address)
+        self.log.debug(self.requestline)
+        print(self.client_address) # self explanatory, duh
+        print(self.requestline) # first line of the http header
+
+        func(self)
+
+    return wrapper 
 
 class handleRequest(http.BaseHTTPRequestHandler):
 
@@ -25,30 +57,6 @@ class handleRequest(http.BaseHTTPRequestHandler):
         self.data = None
 
         super().__init__(request, client_address, server)
-
-    def prep(func):
-        def wrapper(self):
-            '''Does basic connection things like check the login cookie
-            and add the client_address and requestline to the log
-            '''
-            
-            self.requestHeaders = dict(self.headers.items())
-
-            # loginDetails is like a dict
-            # 'username' -> str, username of logged in user
-            # 'accountType' -> str, 'admin', 'user', or 'removed'
-            # 'loggedIn' -> bool, true if logged in, else false
-            # 'authentication' -> str, 'sesscookie' or 'usernameandpassword'
-            # 'sessCookie' -> str, randomized cookie for login session purposes
-
-            self.log.debug(self.client_address)
-            self.log.debug(self.requestline)
-            print(self.client_address) # self explanatory, duh
-            print(self.requestline) # first line of the http header
-
-            func(self)
-
-        return wrapper 
 
     @prep
     def do_HEAD(self):
@@ -88,7 +96,7 @@ logging.info("Server starting up\n")
 if True: # True if only on the machine, False if on the local network
     ip = 'localhost'
 else:
-    ip = '192.168.10.104' #'192.168.10.143' # ip of serverpi
+    ip = '127.0.0.1' # some ip here
 port = 5000
 print(ip + ":"  + str(port))
 logging.info("Server on: " + ip + ":" + str(port))
