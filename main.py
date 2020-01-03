@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.6
+#!/usr/bin/env python3.7
 from __future__ import annotations
 import http.server as http
 import serverCode
@@ -40,8 +40,8 @@ def prep(func: typing.Callable[[handleRequest], None]):
 
         self.log.debug(self.client_address)
         self.log.debug(self.requestline)
-        print(self.client_address) # self explanatory, duh
-        print(self.requestline) # first line of the http header
+        #print(self.client_address) # self explanatory, duh # not really
+        #print(self.requestline) # first line of the http header
 
         func(self)
 
@@ -52,7 +52,7 @@ class handleRequest(http.BaseHTTPRequestHandler):
     def __init__(self, request, client_address, server):
         self.log = logging
         self.client_address = client_address
-        self.log.info(str("New request from " + str(client_address[0])))
+        self.log.info("New request from " + str(client_address[0]))
         
         self.data = None
 
@@ -75,8 +75,11 @@ class handleRequest(http.BaseHTTPRequestHandler):
     def serveWebsite(self):
         if self.path in ['/']:
             self.path = '/index.html'
+        
+        if self.path.split('/')[-1].find('.'):
+            self.path = f"{self.path}.html"
 
-        print("Serving: " + self.path)
+        self.log.debug("Serving: " + self.path)
 
         code, message, data, type_ = serverCode.fetch(self.path[1:], root=homeFiles)
 
