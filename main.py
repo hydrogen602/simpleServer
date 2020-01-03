@@ -76,8 +76,8 @@ class handleRequest(http.BaseHTTPRequestHandler):
         if self.path in ['/']:
             self.path = '/index.html'
         
-        if self.path.split('/')[-1].find('.'):
-            self.path = f"{self.path}.html"
+        #if self.path.split('/')[-1].find('.') == -1:
+        #    self.path = f"{self.path}.html"
 
         self.log.debug("Serving: " + self.path)
 
