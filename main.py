@@ -1,20 +1,17 @@
 #!/usr/bin/env python3.7
 from __future__ import annotations
 import http.server as http
-import serverCode
 import logging
 import sys
 import re
-
 import typing
 
-home = sys.path[0]
-
-# print(f"Home folder = {home}")
+import simpleServer.serverCode as serverCode
 
 # pyVersion = '3.6.0' # also works: 3.4.0
 # version = '1.0.0'
 
+homeFiles = ''
 
 def prep(func: typing.Callable[[handleRequest], None]):
     def wrapper(self):
@@ -89,13 +86,16 @@ class handleRequest(http.BaseHTTPRequestHandler):
         self.log.debug("")
 
 
-logging.basicConfig(filename=home + '/info.log',
+logging.basicConfig(filename='info.log',
                     filemode='a', format='%(asctime)s %(message)s',
                     level=logging.DEBUG)
 
 
 def start(path: str, ip: str, port: int):
     logging.info("Server starting up\n")
+
+    global homeFiles
+    homeFiles = path
 
     print(ip + ":" + str(port))
     logging.info("Server on: " + ip + ":" + str(port))
