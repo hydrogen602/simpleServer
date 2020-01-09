@@ -10,6 +10,7 @@ errorMsg = '''<!DOCTYPE html>
         <p>{0}</p>
     </body>
 </html>'''
+'''Simple error message as html'''
 
 fileTypes = {
     ".html": "text/html",
@@ -23,9 +24,23 @@ fileTypes = {
     ".gif": "image/gif",
     ".ico": "image/png"
 }
+'''MIME for common file extensions'''
 
 
 def fetch(file, root=None) -> (int, str, str, str):
+    '''Fetches a file
+    Returns 404 if the file isn't found and DOES NOT throw an exception
+
+    Args:
+        file (str): The name of the file to get
+        root (str, optional, default=None): The location to look for the file
+
+    Returns:
+        (codeMsg, textMsg, file, type): codeMsg is the HTTP status code,
+        testMsg is the HTTP status description like OK or Forbidden
+        file is the actual contents of the file, in bytes or as a string
+        type is the media type (file type)
+    '''
     'returns codeMsg, textMsg, file, type'
     if '..' in file:
         return 400, 'Bad Request', errorMsg, 'text/html'

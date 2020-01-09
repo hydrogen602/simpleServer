@@ -1,4 +1,13 @@
 #!/usr/bin/env python3.7
+'''Main part of simpleServer
+Serves static pages for helping devloping webpages
+that can't be loaded in the browser because they use
+XMLHttpRequests or something of a similar manner
+import simpleServer as a module and then call `start`
+or run
+    ./main.py folder ip port
+in bash'''
+
 from __future__ import annotations
 import http.server as http
 import logging
@@ -19,7 +28,7 @@ def prep(func: typing.Callable[[handleRequest], None]):
     '''Only for use with handleRequest.
     Preparse a request response by getting the
     headers and logs the connecting address and request'''
-    
+
     def wrapper(self):
         '''Does basic connection things like check the login cookie
         and add the client_address and requestline to the log
@@ -36,8 +45,12 @@ def prep(func: typing.Callable[[handleRequest], None]):
 
 
 class handleRequest(http.BaseHTTPRequestHandler):
+    '''Extends `http.BaseHTTPRequestHandler` and handles incoming requests'''
 
     def __init__(self, request, client_address, server):
+        '''Called by the `http` module and
+        shouldn't be called by anything else'''
+
         self.log = logging
         self.client_address = client_address
         self.log.info("New request from " + str(client_address[0]))
@@ -48,6 +61,8 @@ class handleRequest(http.BaseHTTPRequestHandler):
 
     @prep
     def do_HEAD(self):
+        '''Serves a HEAD request'''
+
         code, message, data, type_ = serverCode.fetch(self.path[1:])
 
         self.send_response(code, message)
@@ -58,9 +73,15 @@ class handleRequest(http.BaseHTTPRequestHandler):
 
     @prep
     def do_GET(self):
+        '''Serves a GET request'''
         self.serveWebsite()
 
     def serveWebsite(self):
+        '''Fetches the requested file and writes it as
+        `http.BaseHTTPRequestHandler` requires.
+        This should be the last method called in the
+        instances life'''
+
         if self.path.endswith('/'):
             self.path += 'index.html'
 
@@ -91,6 +112,13 @@ logging.basicConfig(filename='info.log',
 
 
 def start(path: str, ip: str, port: int):
+    '''Starts the server
+    Args:
+        path (str): The path to the files being served
+        ip   (str): The ip address or localhost
+        port (int): The port number
+    '''
+
     logging.info("Server starting up\n")
 
     global homeFiles
@@ -112,6 +140,7 @@ def start(path: str, ip: str, port: int):
 
 
 def printUsage():
+    '''Prints how to use main.py as a command'''
     print("main.py folder [ip port]")
 
 

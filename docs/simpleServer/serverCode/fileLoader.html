@@ -35,6 +35,7 @@
         &lt;p&gt;{0}&lt;/p&gt;
     &lt;/body&gt;
 &lt;/html&gt;&#39;&#39;&#39;
+&#39;&#39;&#39;Simple error message as html&#39;&#39;&#39;
 
 fileTypes = {
     &#34;.html&#34;: &#34;text/html&#34;,
@@ -48,9 +49,23 @@ fileTypes = {
     &#34;.gif&#34;: &#34;image/gif&#34;,
     &#34;.ico&#34;: &#34;image/png&#34;
 }
+&#39;&#39;&#39;MIME for common file extensions&#39;&#39;&#39;
 
 
 def fetch(file, root=None) -&gt; (int, str, str, str):
+    &#39;&#39;&#39;Fetches a file
+    Returns 404 if the file isn&#39;t found and DOES NOT throw an exception
+
+    Args:
+        file (str): The name of the file to get
+        root (str, optional, default=None): The location to look for the file
+
+    Returns:
+        (codeMsg, textMsg, file, type): codeMsg is the HTTP status code,
+        testMsg is the HTTP status description like OK or Forbidden
+        file is the actual contents of the file, in bytes or as a string
+        type is the media type (file type)
+    &#39;&#39;&#39;
     &#39;returns codeMsg, textMsg, file, type&#39;
     if &#39;..&#39; in file:
         return 400, &#39;Bad Request&#39;, errorMsg, &#39;text/html&#39;
@@ -85,6 +100,17 @@ def fetch(file, root=None) -&gt; (int, str, str, str):
 <section>
 </section>
 <section>
+<h2 class="section-title" id="header-variables">Global variables</h2>
+<dl>
+<dt id="simpleServer.serverCode.fileLoader.errorMsg"><code class="name">var <span class="ident">errorMsg</span></code></dt>
+<dd>
+<section class="desc"><p>Simple error message as html</p></section>
+</dd>
+<dt id="simpleServer.serverCode.fileLoader.fileTypes"><code class="name">var <span class="ident">fileTypes</span></code></dt>
+<dd>
+<section class="desc"><p>MIME for common file extensions</p></section>
+</dd>
+</dl>
 </section>
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
@@ -93,12 +119,43 @@ def fetch(file, root=None) -&gt; (int, str, str, str):
 <span>def <span class="ident">fetch</span></span>(<span>file, root=None)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>returns codeMsg, textMsg, file, type</p></section>
+<section class="desc"><p>Fetches a file
+Returns 404 if the file isn't found and DOES NOT throw an exception</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>file</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name of the file to get</dd>
+<dt><strong><code>root</code></strong> :&ensp;<code>str</code>, optional, default=<code>None</code></dt>
+<dd>The location to look for the file</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt>(codeMsg, textMsg, file, type): codeMsg is the HTTP status code,</dt>
+<dt><code>testMsg</code> <code>is</code> <code>the</code> <code>HTTP</code> <code>status</code> <code>description</code> <code>like</code> <code>OK</code> or <code>Forbidden</code></dt>
+<dd>&nbsp;</dd>
+<dt><code>file</code> <code>is</code> <code>the</code> <code>actual</code> <code>contents</code> of <code>the</code> <code>file</code>, <code>in</code> <code>bytes</code> or <code>as</code> <code>a</code> <code>string</code></dt>
+<dd>&nbsp;</dd>
+<dt><code>type</code> <code>is</code> <code>the</code> <code>media</code> <code>type</code> (<code>file</code> <code>type</code>)</dt>
+<dd>&nbsp;</dd>
+</dl></section>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def fetch(file, root=None) -&gt; (int, str, str, str):
+    &#39;&#39;&#39;Fetches a file
+    Returns 404 if the file isn&#39;t found and DOES NOT throw an exception
+
+    Args:
+        file (str): The name of the file to get
+        root (str, optional, default=None): The location to look for the file
+
+    Returns:
+        (codeMsg, textMsg, file, type): codeMsg is the HTTP status code,
+        testMsg is the HTTP status description like OK or Forbidden
+        file is the actual contents of the file, in bytes or as a string
+        type is the media type (file type)
+    &#39;&#39;&#39;
     &#39;returns codeMsg, textMsg, file, type&#39;
     if &#39;..&#39; in file:
         return 400, &#39;Bad Request&#39;, errorMsg, &#39;text/html&#39;
@@ -144,6 +201,12 @@ def fetch(file, root=None) -&gt; (int, str, str, str):
 <li><h3>Super-module</h3>
 <ul>
 <li><code><a title="simpleServer.serverCode" href="index.html">simpleServer.serverCode</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-variables">Global variables</a></h3>
+<ul class="">
+<li><code><a title="simpleServer.serverCode.fileLoader.errorMsg" href="#simpleServer.serverCode.fileLoader.errorMsg">errorMsg</a></code></li>
+<li><code><a title="simpleServer.serverCode.fileLoader.fileTypes" href="#simpleServer.serverCode.fileLoader.fileTypes">fileTypes</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
