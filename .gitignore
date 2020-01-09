@@ -3,3 +3,5 @@ serverCode/._*
 serverCode/__pycache__/
 .mypy_cache/
 data/info.log
+__pycache__/main.cpython-37.pyc
+__pycache__/__init__.cpython-37.pyc

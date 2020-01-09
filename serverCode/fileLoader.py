@@ -1,4 +1,3 @@
-import jsonHandler as json
 
 errorMsg = '''<!DOCTYPE html>
 <html>
@@ -12,7 +11,19 @@ errorMsg = '''<!DOCTYPE html>
     </body>
 </html>'''
 
-fileTypes = json.load('fileTypes')
+fileTypes = {
+    ".html": "text/html",
+    ".css": "text/css",
+    ".js": "text/javascript",
+    ".xml": "text/xml",
+    ".txt": "text/txt",
+    ".png": "image/png",
+    ".jpeg": "image/jpeg",
+    ".jpg": "image/jpeg",
+    ".gif": "image/gif",
+    ".ico": "image/png"
+}
+
 
 def fetch(file, root=None) -> (int, str, str, str):
     'returns codeMsg, textMsg, file, type'
@@ -30,7 +41,7 @@ def fetch(file, root=None) -> (int, str, str, str):
         absPath = root + '/' + path
     else:
         absPath = path
-        
+
     try:
         if type_ == 'image/png':
             f = open(absPath, 'rb')
@@ -42,17 +53,5 @@ def fetch(file, root=None) -> (int, str, str, str):
         return 404, 'File not found', errorMsg.format(path), 'text/html'
     except IsADirectoryError:
         return 403, 'Forbidden', errorMsg.format(path), 'text/html'
-        '''
-        print('Encountered directory, serving index.html instead')
-        if not absPath.endswith('/'):
-            absPath += '/'
-        absPath += 'index.html'
-        
-        try:
-            f = open(absPath)
-            msg = f.read()
-            f.close()
-        except FileNotFoundError:
-            return 404, 'File not found', errorMsg.format(path), 'text/html'
-        '''
+
     return 200, 'OK', msg, type_

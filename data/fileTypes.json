@@ -2,6 +2,11 @@
     ".html": "text/html",
     ".css": "text/css",
     ".js": "text/javascript",
+    ".xml": "text/xml",
+    ".txt": "text/txt",
     ".png": "image/png",
+    ".jpeg": "image/jpeg",
+    ".jpg": "image/jpeg",
+    ".gif": "image/gif",
     ".ico": "image/png"
 }
