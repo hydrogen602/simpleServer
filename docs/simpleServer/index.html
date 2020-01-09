@@ -5,8 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.7.2" />
 <title>simpleServer API documentation</title>
-<meta name="description" content="simpleServer module.
-`start` is all that is needed to run a server" />
+<meta name="description" content="Main part of simpleServer
+Serves static pages for helping devloping webpages
+that can&#39;t be loaded in the browser because they use
+XMLHttpRequests or …" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -21,14 +23,26 @@
 <h1 class="title">Module <code>simpleServer</code></h1>
 </header>
 <section id="section-intro">
-<p>simpleServer module.
-<code>start</code> is all that is needed to run a server</p>
+<p>Main part of simpleServer
+Serves static pages for helping devloping webpages
+that can't be loaded in the browser because they use
+XMLHttpRequests or something of a similar manner
+import simpleServer as a module and then call <code>start</code>
+or run
+./main.py folder ip port
+in bash</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#39;&#39;&#39;simpleServer module.
-`start` is all that is needed to run a server&#39;&#39;&#39;
+<pre><code class="python">&#39;&#39;&#39;Main part of simpleServer
+Serves static pages for helping devloping webpages
+that can&#39;t be loaded in the browser because they use
+XMLHttpRequests or something of a similar manner
+import simpleServer as a module and then call `start`
+or run
+    ./main.py folder ip port
+in bash&#39;&#39;&#39;
 from .main import start, handleRequest # NOQA</code></pre>
 </details>
 </section>
@@ -38,9 +52,10 @@ from .main import start, handleRequest # NOQA</code></pre>
 <dt><code class="name"><a title="simpleServer.main" href="main.html">simpleServer.main</a></code></dt>
 <dd>
 <section class="desc"><p>Main part of simpleServer
-Serves static pages for helping devloping webpages
-that can't be loaded in the browser because they use
-XMLHttpRequests or …</p></section>
+Call <code>start</code>
+or run
+./main.py folder ip port
+in bash</p></section>
 </dd>
 <dt><code class="name"><a title="simpleServer.serverCode" href="serverCode/index.html">simpleServer.serverCode</a></code></dt>
 <dd>
