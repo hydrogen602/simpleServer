@@ -13,6 +13,7 @@ import simpleServer.serverCode as serverCode
 
 homeFiles = ''
 
+
 def prep(func: typing.Callable[[handleRequest], None]):
     def wrapper(self):
         '''Does basic connection things like check the login cookie
