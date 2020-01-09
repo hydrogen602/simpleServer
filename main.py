@@ -12,7 +12,10 @@ import sys
 import re
 import typing
 
-import simpleServer.serverCode as serverCode
+if __name__ == '__main__':
+    from serverCode import fetch
+else:
+    from .serverCode import fetch
 
 # pyVersion = '3.6.0' # also works: 3.4.0
 # version = '1.0.0'
@@ -60,7 +63,7 @@ class handleRequest(http.BaseHTTPRequestHandler):
     def do_HEAD(self):
         '''Serves a HEAD request'''
 
-        code, message, data, type_ = serverCode.fetch(self.path[1:])
+        code, message, data, type_ = fetch(self.path[1:])
 
         self.send_response(code, message)
         self.send_header('Content-type', type_)
@@ -87,9 +90,9 @@ class handleRequest(http.BaseHTTPRequestHandler):
 
         self.log.debug("Serving: " + self.path)
 
-        code, message, data, type_ = serverCode.fetch(self.path[1:],
-                                                      root=homeFiles
-                                                      )
+        code, message, data, type_ = fetch(self.path[1:],
+                                           root=homeFiles
+                                           )
 
         if isinstance(data, str):
             data = data.encode()

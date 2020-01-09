@@ -47,7 +47,10 @@ import sys
 import re
 import typing
 
-import simpleServer.serverCode as serverCode
+if __name__ == &#39;__main__&#39;:
+    from serverCode import fetch
+else:
+    from .serverCode import fetch
 
 # pyVersion = &#39;3.6.0&#39; # also works: 3.4.0
 # version = &#39;1.0.0&#39;
@@ -95,7 +98,7 @@ class handleRequest(http.BaseHTTPRequestHandler):
     def do_HEAD(self):
         &#39;&#39;&#39;Serves a HEAD request&#39;&#39;&#39;
 
-        code, message, data, type_ = serverCode.fetch(self.path[1:])
+        code, message, data, type_ = fetch(self.path[1:])
 
         self.send_response(code, message)
         self.send_header(&#39;Content-type&#39;, type_)
@@ -122,9 +125,9 @@ class handleRequest(http.BaseHTTPRequestHandler):
 
         self.log.debug(&#34;Serving: &#34; + self.path)
 
-        code, message, data, type_ = serverCode.fetch(self.path[1:],
-                                                      root=homeFiles
-                                                      )
+        code, message, data, type_ = fetch(self.path[1:],
+                                           root=homeFiles
+                                           )
 
         if isinstance(data, str):
             data = data.encode()
@@ -350,7 +353,7 @@ shouldn't be called by anything else</p></section>
     def do_HEAD(self):
         &#39;&#39;&#39;Serves a HEAD request&#39;&#39;&#39;
 
-        code, message, data, type_ = serverCode.fetch(self.path[1:])
+        code, message, data, type_ = fetch(self.path[1:])
 
         self.send_response(code, message)
         self.send_header(&#39;Content-type&#39;, type_)
@@ -377,9 +380,9 @@ shouldn't be called by anything else</p></section>
 
         self.log.debug(&#34;Serving: &#34; + self.path)
 
-        code, message, data, type_ = serverCode.fetch(self.path[1:],
-                                                      root=homeFiles
-                                                      )
+        code, message, data, type_ = fetch(self.path[1:],
+                                           root=homeFiles
+                                           )
 
         if isinstance(data, str):
             data = data.encode()
@@ -472,9 +475,9 @@ instances life</p></section>
 
     self.log.debug(&#34;Serving: &#34; + self.path)
 
-    code, message, data, type_ = serverCode.fetch(self.path[1:],
-                                                  root=homeFiles
-                                                  )
+    code, message, data, type_ = fetch(self.path[1:],
+                                       root=homeFiles
+                                       )
 
     if isinstance(data, str):
         data = data.encode()
