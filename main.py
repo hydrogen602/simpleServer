@@ -12,22 +12,20 @@ import simpleServer.serverCode as serverCode
 # version = '1.0.0'
 
 homeFiles = ''
+'''The path to the files to be served'''
 
 
 def prep(func: typing.Callable[[handleRequest], None]):
+    '''Only for use with handleRequest.
+    Preparse a request response by getting the
+    headers and logs the connecting address and request'''
+    
     def wrapper(self):
         '''Does basic connection things like check the login cookie
         and add the client_address and requestline to the log
         '''
 
         self.requestHeaders = dict(self.headers.items())
-
-        # loginDetails is like a dict
-        # 'username' -> str, username of logged in user
-        # 'accountType' -> str, 'admin', 'user', or 'removed'
-        # 'loggedIn' -> bool, true if logged in, else false
-        # 'authentication' -> str, 'sesscookie' or 'usernameandpassword'
-        # 'sessCookie' -> str, randomized cookie for login session purposes
 
         self.log.debug(self.client_address)
         self.log.debug(self.requestline)

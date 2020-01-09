@@ -38,22 +38,20 @@ import simpleServer.serverCode as serverCode
 # version = &#39;1.0.0&#39;
 
 homeFiles = &#39;&#39;
+&#39;&#39;&#39;The path to the files to be served&#39;&#39;&#39;
 
 
 def prep(func: typing.Callable[[handleRequest], None]):
+    &#39;&#39;&#39;Only for use with handleRequest.
+    Preparse a request response by getting the
+    headers and logs the connecting address and request&#39;&#39;&#39;
+    
     def wrapper(self):
         &#39;&#39;&#39;Does basic connection things like check the login cookie
         and add the client_address and requestline to the log
         &#39;&#39;&#39;
 
         self.requestHeaders = dict(self.headers.items())
-
-        # loginDetails is like a dict
-        # &#39;username&#39; -&gt; str, username of logged in user
-        # &#39;accountType&#39; -&gt; str, &#39;admin&#39;, &#39;user&#39;, or &#39;removed&#39;
-        # &#39;loggedIn&#39; -&gt; bool, true if logged in, else false
-        # &#39;authentication&#39; -&gt; str, &#39;sesscookie&#39; or &#39;usernameandpassword&#39;
-        # &#39;sessCookie&#39; -&gt; str, randomized cookie for login session purposes
 
         self.log.debug(self.client_address)
         self.log.debug(self.requestline)
@@ -179,6 +177,13 @@ if __name__ == &#39;__main__&#39;:
 <section>
 </section>
 <section>
+<h2 class="section-title" id="header-variables">Global variables</h2>
+<dl>
+<dt id="simpleServer.main.homeFiles"><code class="name">var <span class="ident">homeFiles</span></code></dt>
+<dd>
+<section class="desc"><p>The path to the files to be served</p></section>
+</dd>
+</dl>
 </section>
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
@@ -187,25 +192,24 @@ if __name__ == &#39;__main__&#39;:
 <span>def <span class="ident">prep</span></span>(<span>func)</span>
 </code></dt>
 <dd>
-<section class="desc"></section>
+<section class="desc"><p>Only for use with handleRequest.
+Preparse a request response by getting the
+headers and logs the connecting address and request</p></section>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def prep(func: typing.Callable[[handleRequest], None]):
+    &#39;&#39;&#39;Only for use with handleRequest.
+    Preparse a request response by getting the
+    headers and logs the connecting address and request&#39;&#39;&#39;
+    
     def wrapper(self):
         &#39;&#39;&#39;Does basic connection things like check the login cookie
         and add the client_address and requestline to the log
         &#39;&#39;&#39;
 
         self.requestHeaders = dict(self.headers.items())
-
-        # loginDetails is like a dict
-        # &#39;username&#39; -&gt; str, username of logged in user
-        # &#39;accountType&#39; -&gt; str, &#39;admin&#39;, &#39;user&#39;, or &#39;removed&#39;
-        # &#39;loggedIn&#39; -&gt; bool, true if logged in, else false
-        # &#39;authentication&#39; -&gt; str, &#39;sesscookie&#39; or &#39;usernameandpassword&#39;
-        # &#39;sessCookie&#39; -&gt; str, randomized cookie for login session purposes
 
         self.log.debug(self.client_address)
         self.log.debug(self.requestline)
@@ -437,13 +441,6 @@ and add the client_address and requestline to the log</p></section>
 
     self.requestHeaders = dict(self.headers.items())
 
-    # loginDetails is like a dict
-    # &#39;username&#39; -&gt; str, username of logged in user
-    # &#39;accountType&#39; -&gt; str, &#39;admin&#39;, &#39;user&#39;, or &#39;removed&#39;
-    # &#39;loggedIn&#39; -&gt; bool, true if logged in, else false
-    # &#39;authentication&#39; -&gt; str, &#39;sesscookie&#39; or &#39;usernameandpassword&#39;
-    # &#39;sessCookie&#39; -&gt; str, randomized cookie for login session purposes
-
     self.log.debug(self.client_address)
     self.log.debug(self.requestline)
 
@@ -466,13 +463,6 @@ and add the client_address and requestline to the log</p></section>
     &#39;&#39;&#39;
 
     self.requestHeaders = dict(self.headers.items())
-
-    # loginDetails is like a dict
-    # &#39;username&#39; -&gt; str, username of logged in user
-    # &#39;accountType&#39; -&gt; str, &#39;admin&#39;, &#39;user&#39;, or &#39;removed&#39;
-    # &#39;loggedIn&#39; -&gt; bool, true if logged in, else false
-    # &#39;authentication&#39; -&gt; str, &#39;sesscookie&#39; or &#39;usernameandpassword&#39;
-    # &#39;sessCookie&#39; -&gt; str, randomized cookie for login session purposes
 
     self.log.debug(self.client_address)
     self.log.debug(self.requestline)
@@ -528,6 +518,11 @@ and add the client_address and requestline to the log</p></section>
 <li><h3>Super-module</h3>
 <ul>
 <li><code><a title="simpleServer" href="index.html">simpleServer</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-variables">Global variables</a></h3>
+<ul class="">
+<li><code><a title="simpleServer.main.homeFiles" href="#simpleServer.main.homeFiles">homeFiles</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
