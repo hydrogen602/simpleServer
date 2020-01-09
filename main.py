@@ -89,7 +89,7 @@ class handleRequest(http.BaseHTTPRequestHandler):
         self.log.debug("")
 
 
-logging.basicConfig(filename=home + '/data/info.log',
+logging.basicConfig(filename=home + '/info.log',
                     filemode='a', format='%(asctime)s %(message)s',
                     level=logging.DEBUG)
 
