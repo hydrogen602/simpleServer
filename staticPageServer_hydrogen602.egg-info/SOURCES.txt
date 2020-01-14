@@ -1,0 +1,11 @@
+README.md
+setup.py
+staticPageServer/__init__.py
+staticPageServer/main.py
+staticPageServer/serverCode/__init__.py
+staticPageServer/serverCode/fileLoader.py
+staticPageServer/serverCode/functionTools.py
+staticPageServer_hydrogen602.egg-info/PKG-INFO
+staticPageServer_hydrogen602.egg-info/SOURCES.txt
+staticPageServer_hydrogen602.egg-info/dependency_links.txt
+staticPageServer_hydrogen602.egg-info/top_level.txt

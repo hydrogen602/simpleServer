@@ -1,5 +1,3 @@
 #!/bin/bash
 
-cd ..
-pdoc3 --html simpleServer -o simpleServer/docs --force
-cd simpleServer
+pdoc3 --html staticPageServer -o docs --force

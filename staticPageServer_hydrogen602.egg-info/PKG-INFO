@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: staticPageServer-hydrogen602
+Version: 0.0.1
+Summary: A package to quickly host a folder as a local server for developing webpages
+Home-page: https://github.com/hydrogen602/simpleServer
+Author: hydrogen602
+Author-email: hydrogen31415@gmail.com
+License: UNKNOWN
+Description: This code is for serving static pages on localhost:5000 to help with web-development  
+        
+        Useful if a site uses xHttpRequests as just loading the file in a browser will often mean xHttpRequests do not work.  
+        
+        ### How to use
+        Needs python3.7 or newer due to the change in annotations
+        
+        Run `python3.7 main.py [path to folder to serve]`  
+        The path should either be local from where main.py is or an absolute path  
+        
+        `data/fileTypes.json` may need to be appended for special file types
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
