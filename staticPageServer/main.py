@@ -8,6 +8,7 @@ in bash'''
 from __future__ import annotations
 import http.server as http
 import logging
+from logging.handlers import RotatingFileHandler
 import sys
 import re
 import typing
@@ -51,7 +52,7 @@ class handleRequest(http.BaseHTTPRequestHandler):
         '''Called by the `http` module and
         shouldn't be called by anything else'''
 
-        self.log = logging
+        self.log = log
         self.client_address = client_address
         self.log.info("New request from " + str(client_address[0]))
 
@@ -106,9 +107,22 @@ class handleRequest(http.BaseHTTPRequestHandler):
         self.log.debug("")
 
 
-logging.basicConfig(filename='info.log',
-                    filemode='a', format='%(asctime)s %(message)s',
-                    level=logging.DEBUG)
+my_handler = RotatingFileHandler('info.log', mode='a', maxBytes=50*1024,  # 50K
+                                 backupCount=2, encoding=None, delay=0)
+
+log_formatter = logging.Formatter('%(asctime)s %(message)s')
+
+# logging.basicConfig(filename='info.log',
+#                     filemode='a', format='%(asctime)s %(message)s',
+#                     level=logging.DEBUG)
+
+my_handler.setFormatter(log_formatter)
+my_handler.setLevel(logging.DEBUG)
+
+log = logging.getLogger('root')
+log.setLevel(logging.DEBUG)
+
+log.addHandler(my_handler)
 
 
 def start(path: str, ip: str, port: int):
@@ -119,13 +133,13 @@ def start(path: str, ip: str, port: int):
         port (int): The port number
     '''
 
-    logging.info("Server starting up\n")
+    log.info("Server starting up\n")
 
     global homeFiles
     homeFiles = path
 
     print(ip + ":" + str(port))
-    logging.info("Server on: " + ip + ":" + str(port))
+    log.info("Server on: " + ip + ":" + str(port))
 
     t = http.HTTPServer((ip, port), handleRequest)
 
@@ -135,8 +149,8 @@ def start(path: str, ip: str, port: int):
         pass
     finally:
         print("Server shutting down\n")
-        logging.info("Server shutting down\n")
-        logging.shutdown()
+        log.info("Server shutting down\n")
+        log.shutdown()
 
 
 def printUsage():
