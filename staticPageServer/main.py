@@ -150,7 +150,7 @@ def start(path: str, ip: str, port: int):
     finally:
         print("Server shutting down\n")
         log.info("Server shutting down\n")
-        log.shutdown()
+        logging.shutdown()
 
 
 def printUsage():
