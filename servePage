@@ -1,3 +1,4 @@
 #!/bin/bash
 
-/home/jonathan/Documents/GitHub/Python/simpleServer/staticPageServer/main.py $1 $2 $3
+# replace with path to file
+~/Documents/GitHub/Python/simpleServer/staticPageServer/main.py $1 $2 $3
